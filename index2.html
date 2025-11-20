@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>성북구 빈집 지도</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>성북구 빈집 지도</h1>
+    <div id="map"></div>
+
+    <!-- Kakao Map API 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY"></script>
+    <script>
+        // 성북구 중심 좌표
+        var mapContainer = document.getElementById('map');
+        var mapOption = {
+            center: new kakao.maps.LatLng(37.58965, 127.01631), // 성북구 중심
+            level: 4
+        };
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 샘플 빈집 좌표
+        var vacantHouses = [
+            { title: '빈집1', lat: 37.5905, lng: 127.0170 },
+            { title: '빈집2', lat: 37.5880, lng: 127.0150 },
+            { title: '빈집3', lat: 37.5870, lng: 127.0180 }
+        ];
+
+        // 마커 생성
+        vacantHouses.forEach(function(house) {
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(house.lat, house.lng),
+                title: house.title
+            });
+
+            // 클릭하면 이름 표시
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="padding:5px;">' + house.title + '</div>'
+            });
+            kakao.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map, marker);
+            });
+        });
+    </script>
+</body>
+</html>
