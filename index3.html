@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>성북구 빈집 지도</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>성북구 빈집 지도</h1>
+    <div id="map"></div>
+
+    <!-- Kakao Map 없이 간단히 지도 표시 (Leaflet 사용, 무료, 키 필요 없음) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        // 성북구 중심 좌표
+        var map = L.map('map').setView([37.58965, 127.01631], 15);
+
+        // OpenStreetMap 타일 사용
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // 샘플 빈집 마커
+        var vacantHouses = [
+            { title: '빈집1', lat: 37.5905, lng: 127.0170 },
+            { title: '빈집2', lat: 37.5880, lng: 127.0150 },
+            { title: '빈집3', lat: 37.5870, lng: 127.0180 }
+        ];
+
+        vacantHouses.forEach(function(house) {
+            L.marker([house.lat, house.lng])
+                .addTo(map)
+                .bindPopup(house.title);
+        });
+    </script>
+</body>
+</html>
