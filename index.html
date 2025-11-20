@@ -9,3 +9,42 @@
     <p>여기에 지도 표시 및 빈집 위치 표시 기능을 넣을 예정</p>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>성북구 빈집 지도</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    #map {
+      width: 100%;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>성북구 빈집 지도</h2>
+
+<!-- 지도가 들어갈 박스 -->
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // 성북구 중심 좌표
+  var map = L.map('map').setView([37.589, 127.016], 13);
+
+  // 지도 배경 넣기
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
+</script>
+
+</body>
+</html>
